@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+            <ImageView android:layout_width="match_parent"
+                       android:id="@+id/deal_image"
+                       android:scaleType="centerCrop"
+                       android:contentDescription="@null"
+                       android:layout_height="160dp"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/deal_price"
+                      android:text="@string/app_name"
+                      android:textColor="@color/colorPrimaryDark"
+                      android:paddingTop="@dimen/list_margin_standard"
+                      android:paddingBottom="@dimen/list_margin_standard"
+                      android:paddingStart="@dimen/text_margin_standard"
+                      android:paddingEnd="@dimen/text_margin_standard"
+                      android:layout_alignParentEnd="true"
+                      android:layout_marginTop="@dimen/text_margin_standard"
+                      android:background="@drawable/back_price"
+                      android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/deal_title"
+                  android:text="@string/app_name"
+                  android:textSize="16sp"
+                  android:layout_marginTop="@dimen/list_margin_standard"
+                  android:layout_marginStart="@dimen/list_margin_standard"
+                  android:layout_marginEnd="@dimen/list_margin_standard"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:id="@+id/deal_description"
+                  android:textSize="12sp"
+                  android:padding="@dimen/list_margin_standard"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
