@@ -1,8 +1,9 @@
 package com.scvr_tech.travelmantics;
 
-import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,18 +17,15 @@ import java.util.ArrayList;
 
 public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
 
-    private Context mContext;
     private ArrayList<TravelDeal> mDeals;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
 
-    public DealAdapter(Context context) {
-        this.mDeals = FirebaseUtil.sDeals;
-        FirebaseUtil.openFirebaseRef("traveldeals");
+    public DealAdapter() {
         mFirebaseDatabase = FirebaseUtil.sFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.sDatabaseReference;
-
+        mDeals = FirebaseUtil.sDeals;
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -58,14 +56,14 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
 
             }
         };
+
         mDatabaseReference.addChildEventListener(mChildEventListener);
-        this.mContext = context;
     }
 
     @NonNull
     @Override
     public DealHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         return new DealHolder(inflater, parent);
     }
 
@@ -79,12 +77,10 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
         return mDeals.size();
     }
 
-    class DealHolder extends RecyclerView.ViewHolder {
+    class DealHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView dImage;
         private TextView dPrice, dDescription, dTitle;
-
-        private TravelDeal mDeal;
 
         DealHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_deals, parent, false));
@@ -95,16 +91,32 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealHolder> {
             dTitle = itemView.findViewById(R.id.deal_title);
         }
 
-        private void bindDeal(final TravelDeal deal) {
-            mDeal = deal;
+        private void bindDeal(TravelDeal deal) {
 
-            dPrice.setText(mDeal.getPrice());
-            dDescription.setText(mDeal.getDescription());
-            dTitle.setText(mDeal.getTitle());
+            dPrice.setText(deal.getPrice());
+            dDescription.setText(deal.getDescription());
+            dTitle.setText(deal.getTitle());
+            showImage(deal.getImgUrl());
 
-            //Picasso.get()
-            //        .load(deal.getImgUrl())
-            //        .into(dImage);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            Log.d("Clicked position" , String.valueOf(position));
+            TravelDeal selected = mDeals.get(position);
+            Intent intent = new Intent(view.getContext(), DealActivity.class);
+            intent.putExtra("Deal", selected);
+            view.getContext().startActivity(intent);
+        }
+
+        private void showImage(String url) {
+            if (url != null && !url.isEmpty()) {
+                Picasso.get()
+                        .load(url)
+                        .into(dImage);
+            }
         }
     }
 }

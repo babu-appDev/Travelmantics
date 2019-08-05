@@ -5,15 +5,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f0f0f0"
         tools:context=".ListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/rv_deals"
-            android:layout_marginStart="@dimen/list_margin_standard"
-            android:layout_marginEnd="@dimen/list_margin_standard"
-            android:layout_marginTop="@dimen/list_margin_standard"
+            android:paddingStart="@dimen/list_margin_standard"
+            android:paddingEnd="@dimen/list_margin_standard"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/list_margin_standard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />

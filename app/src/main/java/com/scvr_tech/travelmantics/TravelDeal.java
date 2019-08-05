@@ -1,23 +1,27 @@
 package com.scvr_tech.travelmantics;
 
-public class TravelDeal {
+import java.io.Serializable;
+
+public class TravelDeal implements Serializable {
 
     private String id;
     private String title;
     private String description;
     private String price;
     private String imgUrl;
+    private String imageName;
 
     public TravelDeal() {
         // Required empty constructor
     }
 
-    public TravelDeal(String title, String description, String price, String imgUrl) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.imgUrl = imgUrl;
+    public TravelDeal(String title, String description, String price, String imgUrl, String imgName) {
+        this.setId(id);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPrice(price);
+        this.setImgUrl(imgUrl);
+        this.setImageName(imgName);
     }
 
     public String getId() {
@@ -58,5 +62,13 @@ public class TravelDeal {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

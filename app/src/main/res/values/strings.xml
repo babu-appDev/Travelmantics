@@ -3,6 +3,9 @@
     <string name="description">Description</string>
     <string name="price_hint">Price (Numbers Only)</string>
     <string name="title_hint">Deal Title</string>
-    <string name="save">save</string>
+    <string name="delete">Delete</string>
     <string name="new_travel_deal">New Travel Deal</string>
+    <string name="log_out">Log Out</string>
+    <string name="save">save</string>
+    <string name="upload_image">Upload Image</string>
 </resources>
